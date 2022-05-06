@@ -5,9 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.githubrepo.MyApplication
@@ -15,8 +13,6 @@ import com.example.githubrepo.model.readmeModel.ReadmeResponse
 import com.example.githubrepo.model.repoModel.GitHubResponse
 import com.example.githubrepo.repository.GitHubRepository
 import com.example.githubrepo.util.Constants
-import com.example.githubrepo.util.Constants.Companion.readmeUrl
-import com.example.githubrepo.util.Constants.Companion.webViewUrl
 import com.example.githubrepo.util.GitHubResource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -24,17 +20,17 @@ import java.io.IOException
 
 class GitHubViewModel(
     app : Application,
-    val repository: GitHubRepository
+    private val repository: GitHubRepository
 ) : AndroidViewModel(app){
 
     val topRepositories : MutableLiveData<GitHubResource<GitHubResponse>> = MutableLiveData()
-    var topRepositoriesResponse : GitHubResponse? = null
+    private var topRepositoriesResponse : GitHubResponse? = null
 
     init {
-        getTopRepositories(sort = Constants.sort, order = Constants.sort)
+        getTopRepositories(sort = Constants.sort, order = Constants.order)
     }
 
-    fun getTopRepositories(sort : String, order : String) = viewModelScope.launch {
+    private fun getTopRepositories(sort : String, order : String) = viewModelScope.launch {
         safeTopRepositoriesCall(sort, order)
     }
 

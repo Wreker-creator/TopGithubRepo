@@ -6,27 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Adapter
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.githubrepo.MainActivity
-import com.example.githubrepo.R
 import com.example.githubrepo.databinding.FragmentCurrentRepoBinding
-import com.example.githubrepo.repository.GitHubRepository
-import com.example.githubrepo.util.Constants
 import com.example.githubrepo.util.Constants.Companion.readmeUrl
 import com.example.githubrepo.util.Constants.Companion.webViewUrl
 import com.example.githubrepo.util.GitHubResource
 import com.example.githubrepo.viewModel.GitHubViewModel
-import com.google.android.material.snackbar.Snackbar
-import java.security.acl.Owner
-
 
 class CurrentRepoFragment : Fragment() {
 
@@ -61,25 +51,25 @@ class CurrentRepoFragment : Fragment() {
 
         viewModel.getReadme(readmeUrl.toString())
 
-        viewModel.readme.observe(viewLifecycleOwner, Observer { response ->
-            when(response){
-                is GitHubResource.Success->{
+        viewModel.readme.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is GitHubResource.Success -> {
                     hideProgressBar()
-                    response.data?.let { resultResponse->
+                    response.data?.let { resultResponse ->
                         createWebView(resultResponse.html_url.toString())
                     }
                 }
-                is GitHubResource.Loading->{
+                is GitHubResource.Loading -> {
                     hideProgressBar()
                     response.message?.let {
                         Toast.makeText(activity, "An error Occurred $it", Toast.LENGTH_SHORT).show()
                     }
                 }
-                is GitHubResource.Error->{
+                is GitHubResource.Error -> {
                     showProgressBar()
                 }
             }
-        })
+        }
 
         currentRepoBinding.ReadmeWebView.webViewClient = WebViewClient()
         currentRepoBinding.ReadmeWebView.loadUrl(webViewUrl.toString())

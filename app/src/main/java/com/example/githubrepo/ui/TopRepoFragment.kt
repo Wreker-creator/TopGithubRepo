@@ -5,16 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubrepo.MainActivity
 import com.example.githubrepo.R
 import com.example.githubrepo.adapter.TopRepoAdapter
 import com.example.githubrepo.databinding.FragmentTopRepoBinding
-import com.example.githubrepo.util.Constants.Companion.readmeUrl
 import com.example.githubrepo.util.GitHubResource
 import com.example.githubrepo.viewModel.GitHubViewModel
 
@@ -40,26 +37,26 @@ class TopRepoFragment : Fragment() {
         binding.Recycler1.layoutManager = LinearLayoutManager(activity)
         binding.Recycler1.adapter = adapter
 
-        viewModel.topRepositories.observe(viewLifecycleOwner, Observer { response ->
-            when(response){
-                is GitHubResource.Success ->{
+        viewModel.topRepositories.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is GitHubResource.Success -> {
                     hideProgressBar()
                     response.data?.let { repoResponse ->
                         adapter.diffUtil.submitList(repoResponse.items.toList())
                     }
                 }
-                is GitHubResource.Error ->{
+                is GitHubResource.Error -> {
                     hideProgressBar()
                     response.message?.let {
                         Toast.makeText(activity, "An error Occurred $it", Toast.LENGTH_SHORT).show()
                     }
                 }
 
-                is GitHubResource.Loading->{
+                is GitHubResource.Loading -> {
                     showProgressBar()
                 }
             }
-        })
+        }
 
         adapter.setOnItemClickListener {
             val bundle = Bundle().apply {
