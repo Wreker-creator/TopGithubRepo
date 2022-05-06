@@ -1,12 +1,15 @@
 package com.example.githubrepo.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.githubrepo.R
 import com.example.githubrepo.databinding.RecyclerItemBinding
 import com.example.githubrepo.model.Item
 
@@ -37,18 +40,28 @@ class TopRepoAdapter : RecyclerView.Adapter<TopRepoAdapter.MyViewHolder>() {
 
         holder.adapterBinding.RepoName.text = currentObject.name
 
-        val url = currentObject.owner.avatar_url
+        val url = currentObject.owner?.avatar_url
 
         Glide.with(holder.itemView)
             .load(url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.adapterBinding.RepoImage)
 
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it(currentObject) }
+        }
+
 
     }
 
     override fun getItemCount(): Int {
         return diffUtil.currentList.size
+    }
+
+    private var onItemClickListener : ((Item) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Item) -> Unit){
+        onItemClickListener = listener
     }
 
 

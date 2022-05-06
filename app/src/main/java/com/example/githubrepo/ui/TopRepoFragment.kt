@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubrepo.MainActivity
 import com.example.githubrepo.R
@@ -58,6 +59,13 @@ class TopRepoFragment : Fragment() {
                 }
             }
         })
+
+        adapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("repo", it)
+            }
+            findNavController().navigate(R.id.action_topRepoFragment_to_currentRepoFragment, bundle)
+        }
 
         return view
     }
