@@ -6,16 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.githubrepo.R
+import com.example.githubrepo.databinding.FragmentCurrentRepoBinding
 
 
 class CurrentRepoFragment : Fragment() {
 
+    private lateinit var currentRepoBinding: FragmentCurrentRepoBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current_repo, container, false)
+        currentRepoBinding = FragmentCurrentRepoBinding.inflate(inflater, container, false)
+        val view = currentRepoBinding.root
+
+
+
+        return view
     }
 
 }

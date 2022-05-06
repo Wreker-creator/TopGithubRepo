@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/topRepoFragment">
+
+    <fragment
+        android:id="@+id/topRepoFragment"
+        android:name="com.example.githubrepo.ui.TopRepoFragment"
+        android:label="fragment_top_repo"
+        tools:layout="@layout/fragment_top_repo" >
+        <action
+            android:id="@+id/action_topRepoFragment_to_currentRepoFragment"
+            app:destination="@id/currentRepoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentRepoFragment"
+        android:name="com.example.githubrepo.ui.CurrentRepoFragment"
+        android:label="fragment_current_repo"
+        tools:layout="@layout/fragment_current_repo" >
+        <action
+            android:id="@+id/action_currentRepoFragment_to_topRepoFragment"
+            app:destination="@id/topRepoFragment" />
+    </fragment>
+</navigation>
