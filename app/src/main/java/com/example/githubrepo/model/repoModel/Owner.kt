@@ -1,4 +1,4 @@
-package com.example.githubrepo.model
+package com.example.githubrepo.model.repoModel
 
 data class Owner(
     val avatar_url: String?,

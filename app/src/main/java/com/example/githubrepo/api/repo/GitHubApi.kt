@@ -1,6 +1,6 @@
-package com.example.githubrepo.api
+package com.example.githubrepo.api.repo
 
-import com.example.githubrepo.model.GitHubResponse
+import com.example.githubrepo.model.repoModel.GitHubResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

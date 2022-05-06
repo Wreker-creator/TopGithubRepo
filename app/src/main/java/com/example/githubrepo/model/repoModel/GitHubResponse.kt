@@ -1,4 +1,4 @@
-package com.example.githubrepo.model
+package com.example.githubrepo.model.repoModel
 
 data class GitHubResponse(
     val incomplete_results: Boolean?,

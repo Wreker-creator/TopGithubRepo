@@ -1,4 +1,4 @@
-package com.example.githubrepo.api
+package com.example.githubrepo.api.repo
 
 import com.example.githubrepo.util.Constants.Companion.baseUrl
 import okhttp3.OkHttpClient
@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitInstance {
+class RepositoryRetrofitInstance {
 
     companion object{
         private val retrofit by lazy {

@@ -14,6 +14,7 @@ import com.example.githubrepo.MainActivity
 import com.example.githubrepo.R
 import com.example.githubrepo.adapter.TopRepoAdapter
 import com.example.githubrepo.databinding.FragmentTopRepoBinding
+import com.example.githubrepo.util.Constants.Companion.readmeUrl
 import com.example.githubrepo.util.GitHubResource
 import com.example.githubrepo.viewModel.GitHubViewModel
 

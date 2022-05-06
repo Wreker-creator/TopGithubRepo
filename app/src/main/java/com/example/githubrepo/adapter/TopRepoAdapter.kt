@@ -1,17 +1,14 @@
 package com.example.githubrepo.adapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.githubrepo.R
 import com.example.githubrepo.databinding.RecyclerItemBinding
-import com.example.githubrepo.model.Item
+import com.example.githubrepo.model.repoModel.Item
 
 class TopRepoAdapter : RecyclerView.Adapter<TopRepoAdapter.MyViewHolder>() {
 

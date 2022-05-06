@@ -5,13 +5,18 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.githubrepo.MyApplication
-import com.example.githubrepo.model.GitHubResponse
+import com.example.githubrepo.model.readmeModel.ReadmeResponse
+import com.example.githubrepo.model.repoModel.GitHubResponse
 import com.example.githubrepo.repository.GitHubRepository
 import com.example.githubrepo.util.Constants
+import com.example.githubrepo.util.Constants.Companion.readmeUrl
+import com.example.githubrepo.util.Constants.Companion.webViewUrl
 import com.example.githubrepo.util.GitHubResource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -66,6 +71,42 @@ class GitHubViewModel(
             }
         }
     }
+
+    val readme : MutableLiveData<GitHubResource<ReadmeResponse>> = MutableLiveData()
+
+    fun getReadme(url : String) = viewModelScope.launch {
+        safeReadmeApiCall(url)
+    }
+
+    private fun handleReadmeApiCall(response: Response<ReadmeResponse>) : GitHubResource<ReadmeResponse>{
+
+        if(response.isSuccessful){
+            response.body()?.let { resultResponse ->
+                return GitHubResource.Success(resultResponse)
+            }
+        }
+
+        return GitHubResource.Error(response.message())
+
+    }
+
+    private suspend fun safeReadmeApiCall(url : String){
+        readme.postValue(GitHubResource.Loading())
+        try {
+            if(hasInternetFunction()){
+                val response = repository.getReadme(url)
+                readme.postValue(handleReadmeApiCall(response))
+            }else{
+                readme.postValue(GitHubResource.Error("No internet Connection"))
+            }
+        }catch (t : Throwable){
+            when(t){
+                is IOException -> readme.postValue(GitHubResource.Error("Network Failure"))
+                else -> readme.postValue(GitHubResource.Error("Conversion Error"))
+            }
+        }
+    }
+
 
     private fun hasInternetFunction() : Boolean{
         val connectivityManager = getApplication<MyApplication>().getSystemService(

@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"/>
 
-
     <ImageView
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/gradient"
@@ -55,6 +54,7 @@
         tools:text="@string/hello_blank_fragment" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/DescriptionCardView"
         app:cardElevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,5 +71,33 @@
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/DescriptionCardView"
+        android:layout_width="match_parent"
+        android:layout_height="420dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/WebViewCardView"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="420dp">
+
+            <WebView
+                android:id="@+id/ReadmeWebView"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+
+            <ProgressBar
+                android:id="@+id/WebViewProgressBar"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

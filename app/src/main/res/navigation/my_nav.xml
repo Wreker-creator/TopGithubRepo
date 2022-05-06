@@ -24,6 +24,6 @@
             app:destination="@id/topRepoFragment" />
         <argument
             android:name="repo"
-            app:argType="com.example.githubrepo.model.Item" />
+            app:argType="com.example.githubrepo.model.repoModel.Item" />
     </fragment>
 </navigation>
