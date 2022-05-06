@@ -72,32 +72,38 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ScrollView
-        app:layout_constraintTop_toBottomOf="@id/DescriptionCardView"
-        android:layout_width="match_parent"
-        android:layout_height="420dp">
-
         <com.google.android.material.card.MaterialCardView
+            app:layout_constraintTop_toBottomOf="@id/DescriptionCardView"
             android:id="@+id/WebViewCardView"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="420dp">
+            app:cardElevation="10dp">
 
             <WebView
                 android:id="@+id/ReadmeWebView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"/>
+                android:layout_height="match_parent" />
 
             <ProgressBar
                 android:id="@+id/WebViewProgressBar"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
 
         </com.google.android.material.card.MaterialCardView>
 
-    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/GoBack"
+        android:src="@drawable/back"
+        android:scaleType="center"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

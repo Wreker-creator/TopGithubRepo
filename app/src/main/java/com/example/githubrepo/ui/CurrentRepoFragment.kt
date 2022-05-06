@@ -84,6 +84,10 @@ class CurrentRepoFragment : Fragment() {
         currentRepoBinding.ReadmeWebView.webViewClient = WebViewClient()
         currentRepoBinding.ReadmeWebView.loadUrl(webViewUrl.toString())
 
+        currentRepoBinding.GoBack.setOnClickListener {
+            (activity as MainActivity).onBackPressed()
+        }
+
         return view
     }
 
